@@ -24,6 +24,11 @@ export class ContactsInMemoryRepository implements ContactsRepository {
     return contact
   }
 
+  findByName(name: string): Contact | Promise<Contact> {
+    const contact = this.database.find((contact) => contact.name === name)
+    return contact
+  }
+
   update(id: string, data: UpdateContactDto): Contact | Promise<Contact> {
     const contactIndex = this.database.findIndex((contact) => contact.id === id)
     this.database[contactIndex] = {

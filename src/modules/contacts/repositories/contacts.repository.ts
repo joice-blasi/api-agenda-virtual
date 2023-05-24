@@ -9,6 +9,8 @@ export abstract class ContactsRepository {
 
   abstract findOne(id: string): Promise<Contact | undefined> | Contact
 
+  abstract findByName(name: string): Promise<Contact> | Contact
+
   abstract update(id: string, data: UpdateContactDto): Promise<Contact> | Contact
 
   abstract delete(id: string): Promise<void> | void

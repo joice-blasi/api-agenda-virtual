@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateContactDto } from './dto/create-contact.dto';
 import { UpdateContactDto } from './dto/update-contact.dto';
 import { ContactsRepository } from './repositories/contacts.repository';
@@ -8,6 +8,10 @@ export class ContactsService {
   constructor(private contactRepository: ContactsRepository) { }
 
   async create(createContactDto: CreateContactDto) {
+    const findName = await this.contactRepository.findByName(createContactDto.name)
+    if (findName) {
+      throw new ConflictException('Name already registered')
+    }
     const contact = await this.contactRepository.create(createContactDto)
     return contact
   }
@@ -19,15 +23,26 @@ export class ContactsService {
 
   async findOne(id: string) {
     const contact = await this.contactRepository.findOne(id)
+    if (!contact) {
+      throw new NotFoundException('Contact not found')
+    }
     return contact
   }
 
   async update(id: string, updateContactDto: UpdateContactDto) {
-    const contact = await this.contactRepository.update(id, updateContactDto)
-    return contact
+    const contact = await this.contactRepository.findOne(id)
+    if (!contact) {
+      throw new NotFoundException('Contact not found')
+    }
+    const newContact = await this.contactRepository.update(id, updateContactDto)
+    return newContact
   }
 
   async remove(id: string) {
+    const contact = await this.contactRepository.findOne(id)
+    if (!contact) {
+      throw new NotFoundException('Contact not found')
+    }
     await this.contactRepository.delete(id)
     return
   }
