@@ -3,7 +3,9 @@ import { CreateUserDto } from "../../dto/create-user.dto";
 import { UpdateUserDto } from "../../dto/update-user.dto";
 import { User } from "../../entities/user.entity";
 import { UsersRepository } from "../users.repository";
+import { Injectable } from "@nestjs/common";
 
+@Injectable()
 export class UsersInMemoryRepository implements UsersRepository {
   private database: User[] = []
 
@@ -34,6 +36,6 @@ export class UsersInMemoryRepository implements UsersRepository {
 
   delete(id: string): void | Promise<void> {
     const userIndex = this.database.findIndex((user) => user.id === id)
-    this.database.splice(userIndex - 1)
+    this.database.splice(userIndex, 1)
   }
 }
