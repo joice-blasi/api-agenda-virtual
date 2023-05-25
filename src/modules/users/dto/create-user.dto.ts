@@ -21,7 +21,7 @@ export class CreateUserDto {
   })
   password: string
 
-  @IsInt()
+  @IsString()
   @IsNotEmpty()
-  telephone: number
+  telephone: string
 }

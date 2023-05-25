@@ -34,6 +34,12 @@ export class ContactsService {
     if (!contact) {
       throw new NotFoundException('Contact not found')
     }
+    if (updateContactDto.name) {
+      const findName = await this.contactRepository.findByName(updateContactDto.name)
+      if (findName) {
+        throw new ConflictException('Name already registered')
+      }
+    }
     const newContact = await this.contactRepository.update(id, updateContactDto)
     return newContact
   }

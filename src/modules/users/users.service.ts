@@ -34,6 +34,12 @@ export class UsersService {
     if (!user) {
       throw new NotFoundException('User not found')
     }
+    if (updateUserDto.email) {
+      const findEmail = await this.usersRepository.findByEmail(updateUserDto.email)
+      if (findEmail) {
+        throw new ConflictException('E-mail already registered')
+      }
+    }
     const newUser = await this.usersRepository.update(id, updateUserDto)
     return newUser
   }

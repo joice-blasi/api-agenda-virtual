@@ -4,7 +4,7 @@ export class Contact {
   readonly id: string
   name: string
   email: string
-  telephone: number
+  telephone: string
   createdAt: Date
   user_id?: string
 

@@ -5,11 +5,11 @@ export class User {
     readonly id: string
     name: string
     email: string
+    telephone: string
+    createdAt: Date
 
     @Exclude()
     password: string
-    telephone: number
-    createdAt: Date
 
     constructor() {
         this.id = randomUUID()

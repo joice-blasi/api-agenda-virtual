@@ -11,7 +11,11 @@ export class CreateContactDto {
   @IsNotEmpty()
   email: string
 
-  @IsInt()
+  @IsString()
   @IsNotEmpty()
-  telephone: number
+  telephone: string
+
+  @IsString()
+  @IsNotEmpty()
+  user_id: string
 }
