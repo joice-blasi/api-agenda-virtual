@@ -1,7 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, HttpCode } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
 import { LocalAuthGuard } from './local-auth.guard';
 
 interface IUserLogin {
@@ -13,6 +11,7 @@ interface IUserLogin {
 export class AuthController {
   constructor(private readonly authService: AuthService) { }
 
+  @HttpCode(200)
   @Post('')
   @UseGuards(LocalAuthGuard)
   async login(@Body() user: IUserLogin) {

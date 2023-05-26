@@ -11,31 +11,31 @@ export class ContactsController {
   @Post('')
   @UseGuards(JwtAuthGuard)
   create(@Body() createContactDto: CreateContactDto, @Request() req) {
-    return this.contactsService.create(createContactDto, req.user.id);
+    return this.contactsService.create(createContactDto, req.user.id)
   }
 
   @Get('')
   @UseGuards(JwtAuthGuard)
-  findAll() {
-    return this.contactsService.findAll();
+  findAll(@Request() req) {
+    return this.contactsService.findAll(req.user.id)
   }
 
   @Get(':id')
   @UseGuards(JwtAuthGuard)
-  findOne(@Param('id') id: string) {
-    return this.contactsService.findOne(id);
+  findOne(@Param('id') id: string, @Request() req) {
+    return this.contactsService.findOne(id, req.user.id)
   }
 
   @Patch(':id')
   @UseGuards(JwtAuthGuard)
-  update(@Param('id') id: string, @Body() updateContactDto: UpdateContactDto) {
-    return this.contactsService.update(id, updateContactDto);
+  update(@Param('id') id: string, @Body() updateContactDto: UpdateContactDto, @Request() req) {
+    return this.contactsService.update(id, updateContactDto, req.user.id)
   }
 
   @HttpCode(204)
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
-  remove(@Param('id') id: string) {
-    return this.contactsService.remove(id);
+  remove(@Param('id') id: string, @Request() req) {
+    return this.contactsService.remove(id, req.user.id)
   }
 }

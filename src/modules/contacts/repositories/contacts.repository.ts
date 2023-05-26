@@ -5,9 +5,9 @@ import { Contact } from "../entities/contact.entity";
 export abstract class ContactsRepository {
   abstract create(data: CreateContactDto, userId: string): Promise<Contact> | Contact
 
-  abstract findAll(): Promise<Contact[]> | Contact[]
+  abstract findAll(idAuth: string): Promise<Contact[]> | Contact[]
 
-  abstract findOne(id: string): Promise<Contact | undefined> | Contact
+  abstract findOne(id: string, idAuth: string): Promise<Contact | undefined> | Contact
 
   abstract findByName(name: string): Promise<Contact> | Contact
 

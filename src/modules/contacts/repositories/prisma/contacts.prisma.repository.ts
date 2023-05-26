@@ -25,14 +25,21 @@ export class ContactsPrismaRepository implements ContactsRepository {
     return newContact
   }
 
-  async findAll(): Promise<Contact[]> {
-    const contacts = await this.prisma.contact.findMany()
+  async findAll(idAuth: string): Promise<Contact[]> {
+    const contacts = await this.prisma.contact.findMany({
+      where: {
+        userId: idAuth
+      }
+    })
     return contacts
   }
 
-  async findOne(id: string): Promise<Contact> {
-    const contact = await this.prisma.contact.findUnique({
-      where: { id }
+  async findOne(id: string, idAuth: string): Promise<Contact> {
+    const contact = await this.prisma.contact.findFirst({
+      where: {
+        id: id,
+        userId: idAuth
+      }
     })
     return contact
   }

@@ -1,4 +1,4 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersRepository } from './repositories/users.repository';
@@ -16,7 +16,10 @@ export class UsersService {
     return user
   }
 
-  async findOne(id: string) {
+  async findOne(id: string, idAuth: string) {
+    if (id !== idAuth) {
+      throw new ForbiddenException('Not authorized')
+    }
     const user = await this.usersRepository.findOne(id)
     if (!user) {
       throw new NotFoundException('User not found')
@@ -29,10 +32,13 @@ export class UsersService {
     return user
   }
 
-  async update(id: string, updateUserDto: UpdateUserDto) {
+  async update(id: string, updateUserDto: UpdateUserDto, idAuth: string) {
     const user = await this.usersRepository.findOne(id)
     if (!user) {
       throw new NotFoundException('User not found')
+    }
+    if (id !== idAuth) {
+      throw new ForbiddenException('Not authorized')
     }
     if (updateUserDto.email) {
       const findEmail = await this.usersRepository.findByEmail(updateUserDto.email)
@@ -44,10 +50,13 @@ export class UsersService {
     return newUser
   }
 
-  async remove(id: string) {
+  async remove(id: string, idAuth: string) {
     const user = await this.usersRepository.findOne(id)
     if (!user) {
       throw new NotFoundException('User not found')
+    }
+    if (id !== idAuth) {
+      throw new ForbiddenException('Not authorized')
     }
     await this.usersRepository.delete(id)
     return

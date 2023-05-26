@@ -16,21 +16,21 @@ export class ContactsService {
     return contact
   }
 
-  async findAll() {
-    const contacts = await this.contactRepository.findAll()
+  async findAll(idAuth: string) {
+    const contacts = await this.contactRepository.findAll(idAuth)
     return contacts
   }
 
-  async findOne(id: string) {
-    const contact = await this.contactRepository.findOne(id)
+  async findOne(id: string, idAuth: string) {
+    const contact = await this.contactRepository.findOne(id, idAuth)
     if (!contact) {
       throw new NotFoundException('Contact not found')
     }
     return contact
   }
 
-  async update(id: string, updateContactDto: UpdateContactDto) {
-    const contact = await this.contactRepository.findOne(id)
+  async update(id: string, updateContactDto: UpdateContactDto, idAuth: string) {
+    const contact = await this.contactRepository.findOne(id, idAuth)
     if (!contact) {
       throw new NotFoundException('Contact not found')
     }
@@ -44,8 +44,8 @@ export class ContactsService {
     return newContact
   }
 
-  async remove(id: string) {
-    const contact = await this.contactRepository.findOne(id)
+  async remove(id: string, idAuth: string) {
+    const contact = await this.contactRepository.findOne(id, idAuth)
     if (!contact) {
       throw new NotFoundException('Contact not found')
     }
