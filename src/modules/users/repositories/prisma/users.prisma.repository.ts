@@ -11,18 +11,12 @@ export class UsersPrismaRepository implements UsersRepository {
   constructor(private prisma: PrismaService) { }
 
   async create(data: CreateUserDto): Promise<User> {
-    console.log(data, "aqui")
     const user = new User()
     Object.assign(user, { ...data })
     const newUser = await this.prisma.user.create({
       data: { ...user }
     })
     return plainToInstance(User, newUser)
-  }
-
-  async findAll(): Promise<User[]> {
-    const users = await this.prisma.user.findMany()
-    return plainToInstance(User, users)
   }
 
   async findOne(id: string): Promise<User> {
@@ -36,7 +30,7 @@ export class UsersPrismaRepository implements UsersRepository {
     const user = await this.prisma.user.findUnique({
       where: { email }
     })
-    return plainToInstance(User, user)
+    return user
   }
 
   async update(id: string, data: UpdateUserDto): Promise<User> {

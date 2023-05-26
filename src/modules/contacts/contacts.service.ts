@@ -7,12 +7,12 @@ import { ContactsRepository } from './repositories/contacts.repository';
 export class ContactsService {
   constructor(private contactRepository: ContactsRepository) { }
 
-  async create(createContactDto: CreateContactDto) {
+  async create(createContactDto: CreateContactDto, userId: string) {
     const findName = await this.contactRepository.findByName(createContactDto.name)
     if (findName) {
       throw new ConflictException('Name already registered')
     }
-    const contact = await this.contactRepository.create(createContactDto)
+    const contact = await this.contactRepository.create(createContactDto, userId)
     return contact
   }
 

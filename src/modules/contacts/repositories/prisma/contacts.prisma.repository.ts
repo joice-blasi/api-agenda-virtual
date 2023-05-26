@@ -9,7 +9,7 @@ import { PrismaService } from "src/database/prisma.service";
 export class ContactsPrismaRepository implements ContactsRepository {
   constructor(private prisma: PrismaService) { }
 
-  async create(data: CreateContactDto): Promise<Contact> {
+  async create(data: CreateContactDto, userId: string): Promise<Contact> {
     const contact = new Contact()
     Object.assign(contact, { ...data })
     const newContact = await this.prisma.contact.create({
@@ -19,7 +19,7 @@ export class ContactsPrismaRepository implements ContactsRepository {
         email: contact.email,
         telephone: contact.telephone,
         createdAt: contact.createdAt,
-        userId: contact.user_id
+        userId
       }
     })
     return newContact

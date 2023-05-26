@@ -16,10 +16,6 @@ export class UsersInMemoryRepository implements UsersRepository {
     return plainToInstance(User, newUser)
   }
 
-  findAll(): User[] | Promise<User[]> {
-    return plainToInstance(User, this.database)
-  }
-
   findOne(id: string): User | Promise<User> {
     const user = this.database.find((user) => user.id === id)
     return plainToInstance(User, user)

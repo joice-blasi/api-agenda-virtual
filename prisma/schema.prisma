@@ -28,7 +28,7 @@ model Contact {
   email     String
   telephone String
   createdAt DateTime
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
 
   @@map("contacts")
