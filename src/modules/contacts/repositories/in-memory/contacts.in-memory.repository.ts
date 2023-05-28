@@ -1,8 +1,8 @@
-import { Injectable } from "@nestjs/common";
-import { ContactsRepository } from "../contacts.repository";
-import { CreateContactDto } from "../../dto/create-contact.dto";
-import { Contact } from "../../entities/contact.entity";
-import { UpdateContactDto } from "../../dto/update-contact.dto";
+import { Injectable } from "@nestjs/common"
+import { ContactsRepository } from "../contacts.repository"
+import { CreateContactDto } from "../../dto/create-contact.dto"
+import { Contact } from "../../entities/contact.entity"
+import { UpdateContactDto } from "../../dto/update-contact.dto"
 
 @Injectable()
 export class ContactsInMemoryRepository implements ContactsRepository {

@@ -1,10 +1,10 @@
-import { Injectable } from "@nestjs/common";
-import { UsersRepository } from "../users.repository";
-import { CreateUserDto } from "../../dto/create-user.dto";
-import { UpdateUserDto } from "../../dto/update-user.dto";
-import { User } from "../../entities/user.entity";
-import { PrismaService } from "src/database/prisma.service";
-import { plainToInstance } from "class-transformer";
+import { Injectable } from "@nestjs/common"
+import { UsersRepository } from "../users.repository"
+import { CreateUserDto } from "../../dto/create-user.dto"
+import { UpdateUserDto } from "../../dto/update-user.dto"
+import { User } from "../../entities/user.entity"
+import { PrismaService } from "src/database/prisma.service"
+import { plainToInstance } from "class-transformer"
 
 @Injectable()
 export class UsersPrismaRepository implements UsersRepository {
