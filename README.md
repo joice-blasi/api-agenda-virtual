@@ -25,7 +25,7 @@ Trata-se de uma api que gerencia contatos de um usuário, sendo possível fazer 
 - [PostgreSQL](https://www.postgresql.org/)
 - [Prisma](https://www.prisma.io/)
 
-A URL base da aplicação: http://localhost:3000
+A URL base da aplicação: http://localhost:3001
 
 ---
 
@@ -83,4 +83,4 @@ npm run start:dev
 
 [ Voltar para o topo ](#tabela-de-conteúdos)
 
-Para acessar os endpoints, rode a aplicação e acesse em seu navegador: http://localhost:3000/api
+Para acessar os endpoints, rode a aplicação e acesse em seu navegador: http://localhost:3001/api
