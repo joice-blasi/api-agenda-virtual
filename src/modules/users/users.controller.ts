@@ -15,11 +15,11 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
-  @Get(":id")
+  @Get("/me")
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
-  findOne(@Param("id") id: string, @Request() req) {
-    return this.usersService.findOne(id, req.user.id);
+  findOne(@Request() req) {
+    return this.usersService.findOne(req.user.id);
   }
 
   @Patch(":id")

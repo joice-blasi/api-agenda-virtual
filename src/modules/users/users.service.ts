@@ -16,11 +16,8 @@ export class UsersService {
     return user
   }
 
-  async findOne(id: string, idAuth: string) {
-    if (id !== idAuth) {
-      throw new ForbiddenException("Not authorized")
-    }
-    const user = await this.usersRepository.findOne(id)
+  async findOne(idAuth: string) {
+    const user = await this.usersRepository.findOne(idAuth)
     if (!user) {
       throw new NotFoundException("User not found")
     }
